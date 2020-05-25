@@ -86,6 +86,44 @@ void popElement()
 	
 }
 
+/*
+Question 3: Implement a stack (stack structure, push function, pop function) using a list.
+*/
+
+typedef struct nodeStack
+{
+	int value; // node->data (node.data)
+	struct nodeStack* next; // node->next (node.next)
+}nodeStack;
+
+
+nodeStack* top_node = NULL; // pointer to the top of the stack
+
+
+
+void listStackPush(int val)
+{
+
+	nodeStack* temp_node; // a new temp node 
+	temp_node = malloc(sizeof(nodeStack)); // runtime heap allocation for new node
+	temp_node->value = val; // whatever the value is its stored in tmp->data
+	temp_node->next = top_node; // the next of temp is top (tmp created to the left of top)
+	top_node = temp_node; // top and temp are now the same
+}
+
+
+void listStackPop()
+{
+	int temp_node_data; // new variable to hold temp->data portion
+	nodeStack* temp_node; // new temp node
+	temp_node = top_node; //the new temp node now points to the top of the stack
+	temp_node_data = temp_node->value; // assign the value of n to tem->data portion
+	top_node = top_node->next; //the top node is now the node next to top (top->next)
+	free(temp_node); //release the temp node
+
+}
+
+
 int main()
 {
 /*
@@ -122,6 +160,16 @@ Question 2 main:
 	popElement();
 	//printArrayStack();
 
-
+/*
+Question 3 main:
+*/
+	listStackPush(1);
+	listStackPush(29);
+	listStackPush(3);
+	listStackPush(100);
+	printf("\n");
+	printf("The element at the top of the stack is: %d\n", top_node->value);
+	listStackPop();
+	printf("The element at the top of the stack is: %d\n", top_node->value);
 	return 0;;
 }
