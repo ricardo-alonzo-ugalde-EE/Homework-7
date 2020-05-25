@@ -2,24 +2,25 @@
 #include <stdio.h> 
 #include <stdlib.h> 
 
+
+/*
+Question 1: Write a function that removes every other node (starting with the second node) from a list
+*/
+
 typedef struct listNode {
 	int node_value;
 	struct listNode *next_node;
 }listNode;
 
-
-
-
 //function used to print the elements inside nodes
-void listNodePrint(listNode *node_element)
+void listNodePrint(listNode* node_element)
 {
 	printf("The nodes contain the following elements:\n");
-	while(node_element != NULL) {
+	while (node_element != NULL) {
 		printf("%d\n", node_element->node_value);
 		node_element = node_element->next_node;
 	}
 }
-
 
 // Function to delete every other element from a singly linked list
 void deleteNodeElement(listNode *head)
@@ -28,16 +29,25 @@ void deleteNodeElement(listNode *head)
 	listNode *current = head;
 	listNode *linker = head->next_node;
 
-	while (linker != NULL)
+	while (linker != NULL) // 
 	{
 		current->next_node = linker->next_node; // skips every other
 		current = current->next_node; // ensures updates current
 		linker = current->next_node; // updates linker
 	}
+	listNodePrint(head);
 }
+
+/*
+Question 2: Implement a stack (stack structure, push function, pop function) using an array.
+*/
+
 
 int main()
 {
+/*
+Question 1 main:
+*/
 	// Node heap allocation using malloc
 	listNode *head = (listNode*)malloc(sizeof(listNode)); 
 	listNode *second = (listNode*)malloc(sizeof(listNode));
@@ -55,10 +65,9 @@ int main()
 	fourth->next_node = fifth;
 	fifth->node_value = 5;
 	fifth->next_node = NULL;
-
-	listNodePrint(head);
-	deleteNodeElement(head);
-	listNodePrint(head);
+	listNodePrint(head); // prints nodes before delete
+	deleteNodeElement(head); // call to the delete Node function
+	
 
 	return 0;
 }
